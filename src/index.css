@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+/* Design tokens. Tailwind v4 turns these into utilities (bg-porcelain, text-slate, font-display, ...). */
+@theme {
+  --color-porcelain: #f6f5f1;
+  --color-paper: #ffffff;
+  --color-obsidian: #171a19;
+  --color-electric: #315bfa;
+  --color-electric-hover: #2448d8;
+  --color-mist: #e6e8e2;
+  --color-slate: #656c67;
+  --color-pale: #eaf0ff;
+  --color-success: #217a50;
+  --color-error: #b42318;
+
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-porcelain);
+    color: var(--color-obsidian);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Safety net only: the layout itself is built not to overflow. "clip" (unlike "hidden")
+       does not create a scroll container, so sticky positioning keeps working. */
+    overflow-x: clip;
+  }
+
+  /* Long words, emails and URLs wrap instead of pushing the page wider. */
+  p,
+  li,
+  dd,
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-electric);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-electric);
+    outline-offset: 3px;
+  }
+
+  /* On dark sections the focus ring switches to a light colour so it stays visible. */
+  .on-dark :focus-visible {
+    outline-color: var(--color-pale);
+  }
+}
+
+@layer utilities {
+  /* Technical label used for section identifiers and project metadata. */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Faint architectural grid. Static; no animation. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(23 26 25 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(23 26 25 / 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-grid-fine {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+/* Reduced motion: no smooth scrolling, no transitions or animations. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
