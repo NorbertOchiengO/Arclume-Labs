@@ -56,7 +56,20 @@ Design tokens (colors, fonts) live in `src/index.css` under `@theme`. Fonts are 
 
 Thousand Sunny Resort has two deployed URLs that are one project: `thousand-sunny-resort` (the labelled concept, main link) and `thousand-sunny-henna` (an earlier, longer version, linked as "Earlier version").
 
-No screenshots are used. To add a genuine one, put it in `public/work/` and set `image` on the project.
+### Project screenshots
+
+Each card shows a screenshot of the live site from `public/work/<project-id>.jpg`. Until those files exist (or if one fails to load) the card shows a typographic preview in the project's colours, so nothing breaks.
+
+The screenshots could not be captured from the build environment because it cannot reach the live sites. Create them on your computer:
+
+```bash
+npm install --save-dev playwright
+npx playwright install chromium
+npm run screenshots                       # all six projects
+npm run screenshots -- winrose-pharma     # or just one, by project id
+```
+
+This saves 1280x800 JPEGs of each live homepage (project URLs come from `src/data/projects.js`). Open them and check they look right (for example, no cookie pop-ups or half-loaded animations). Re-run after a project's design changes. Screenshots reproduce each site's own images and text, so make sure you have the rights to the images used on those sites. You can also drop in your own hand-made image at the same path.
 
 ## Contact form: how submission works
 

@@ -10,8 +10,8 @@
 //                      was client work before describing it as such.
 //
 // `palette` uses each site's own declared theme colour so previews keep a hint of its identity.
-// `image` is optional. Add a genuine screenshot path (e.g. '/work/novacare.webp') to replace
-// the typographic preview. If the file fails to load the card falls back automatically.
+// `image` is the project's screenshot in public/work/ (create them with `npm run screenshots`).
+// Until a file exists, or if it fails to load, the card shows a typographic preview instead.
 // `technologies` is intentionally omitted: the stacks have not been verified.
 
 export const projects = [
@@ -24,7 +24,7 @@ export const projects = [
       'A freight and logistics website covering transportation, warehousing, cargo handling and last-mile delivery, with an online shipping-quote request.',
     url: 'https://arclume-freight.vercel.app/',
     featured: true,
-    image: null,
+    image: '/work/arclume-freight.jpg',
     palette: { bg: '#14263D', fg: '#F6F5F1', accent: '#8FA7FF' },
   },
   {
@@ -36,7 +36,7 @@ export const projects = [
       'A healthcare website for a fictional health centre: services, sample clinicians and a demonstration appointment request.',
     url: 'https://nova-care-health-center.vercel.app/',
     featured: true,
-    image: null,
+    image: '/work/novacare-health-centre.jpg',
     palette: { bg: '#176B61', fg: '#F6F5F1', accent: '#BFEBE3' },
   },
   {
@@ -48,7 +48,7 @@ export const projects = [
       'A nonprofit website for a fictional foundation focused on youth empowerment, education access and sustainable livelihoods, with programs and ways to get involved.',
     url: 'https://imara-impact-foundation.vercel.app/',
     featured: true,
-    image: null,
+    image: '/work/imara-impact-foundation.jpg',
     palette: { bg: '#173C2B', fg: '#F6F5F1', accent: '#C9E7B4' },
   },
   {
@@ -65,7 +65,7 @@ export const projects = [
     altUrl: 'https://thousand-sunny-henna.vercel.app/',
     altLabel: 'Earlier version',
     featured: true,
-    image: null,
+    image: '/work/thousand-sunny-resort.jpg',
     palette: { bg: '#123B36', fg: '#F6F5F1', accent: '#E8C88A' },
   },
   {
@@ -77,7 +77,7 @@ export const projects = [
       'An airline website built around flight search, fare deals, destinations, cabin classes and a loyalty program.',
     url: 'https://wings-of-freedom-lovat.vercel.app/',
     featured: false,
-    image: null,
+    image: '/work/wings-of-freedom.jpg',
     palette: { bg: '#101A2E', fg: '#F6F5F1', accent: '#8FA7FF' },
   },
   {
@@ -89,7 +89,7 @@ export const projects = [
       'A website for a community pharmacy in Utawala, Nairobi: services, opening hours, location, and medicine requests sent through WhatsApp.',
     url: 'https://winrose-pharma.vercel.app/',
     featured: false,
-    image: null,
+    image: '/work/winrose-pharma.jpg',
     palette: { bg: '#0F6B58', fg: '#F6F5F1', accent: '#BFEBE3' },
   },
 ]

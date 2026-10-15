@@ -2,41 +2,50 @@ import { useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import Reveal from './Reveal.jsx'
 
-// Typographic, CSS-based preview that carries a hint of the project's own colours.
-// No screenshots are claimed; if `image` is set and loads, it replaces the preview.
+// Preview of a project: a screenshot of the live site when its image file exists.
+// A typographic preview in the project's own colours sits underneath. It shows while the
+// screenshot loads and stays as the fallback if the file is missing or fails to load.
 function Preview({ project, tall }) {
+  const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
   const { bg, fg, accent } = project.palette
-
-  if (project.image && !failed) {
-    return (
-      <img
-        src={project.image}
-        alt={`Screenshot of the ${project.title} website`}
-        loading="lazy"
-        onError={() => setFailed(true)}
-        className="h-full w-full object-cover object-top"
-      />
-    )
-  }
+  const showImage = Boolean(project.image) && !failed
 
   return (
-    <div
-      aria-hidden="true"
-      className="bg-grid-fine relative flex h-full w-full flex-col justify-between p-5 sm:p-7"
-      style={{ backgroundColor: bg, color: fg }}
-    >
-      <div className="label-mono flex flex-wrap items-center justify-between gap-x-4 gap-y-1" style={{ color: accent }}>
-        <span>{project.category}</span>
-        <span>{project.type}</span>
-      </div>
-      <p
-        className={`font-display font-semibold leading-[0.95] tracking-tight transition-transform duration-500 ease-out group-hover:translate-x-1 ${
-          tall ? 'text-4xl sm:text-5xl lg:text-6xl' : 'text-3xl sm:text-4xl'
-        }`}
+    <div className="relative h-full w-full">
+      <div
+        aria-hidden="true"
+        className="bg-grid-fine relative flex h-full w-full flex-col justify-between p-5 sm:p-7"
+        style={{ backgroundColor: bg, color: fg }}
       >
-        {project.title}
-      </p>
+        <div className="label-mono flex flex-wrap items-center justify-between gap-x-4 gap-y-1" style={{ color: accent }}>
+          <span>{project.category}</span>
+          <span>{project.type}</span>
+        </div>
+        <p
+          className={`font-display font-semibold leading-[0.95] tracking-tight ${
+            tall ? 'text-4xl sm:text-5xl lg:text-6xl' : 'text-3xl sm:text-4xl'
+          }`}
+        >
+          {project.title}
+        </p>
+      </div>
+
+      {showImage && (
+        <img
+          src={project.image}
+          alt={`Screenshot of the ${project.title} website homepage`}
+          width="1280"
+          height="800"
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          className={`absolute inset-0 h-full w-full object-cover object-top transition-[opacity,transform] duration-500 ease-out group-hover:scale-[1.03] ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      )}
     </div>
   )
 }
